@@ -1,0 +1,30 @@
+RewriteEngine On
+
+# Force HTTPS for all pages EXCEPT api.php (ESP32 uses plain HTTP for API calls)
+RewriteCond %{HTTPS} off
+RewriteCond %{REQUEST_URI} !^/api\.php [NC]
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Route project URLs to project dashboard
+# esp.ashikone.com/projects/myproject -> projects/index.php?slug=myproject
+RewriteRule ^projects/([a-zA-Z0-9_-]+)/?$ projects/index.php?slug=$1 [L,QSA]
+
+# Increase request body size limit for AI Code Editor
+LimitRequestBody 10485760
+
+# Increase PHP limits for large code submissions
+<IfModule mod_php.c>
+    php_value post_max_size 10M
+    php_value upload_max_filesize 10M
+    php_value memory_limit 128M
+</IfModule>
+
+# Prevent directory listing
+Options -Indexes
+
+# Security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
