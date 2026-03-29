@@ -9,6 +9,10 @@
 ## 🚀 Key Features
 
 - **🌐 Global Control**: Access and toggle your ESP devices from any browser, anywhere in the world.
+- **🎛️ DynamicFlow Regulators**: Control fan speeds or light brightness seamlessly via 0-100% intelligent PWM sliders.
+- **⏱️ AutoPilot Timers**: Schedule autonomous ON/OFF times for any device on specific days of the week.
+- **📈 DataPulse Graphs**: Visualize real-time analog sensor data with beautiful interactive charts right on the dashboard.
+- **☁️ Signal Air OTA & Inject**: Perform Over-The-Air firmware updates and reconfigure WiFi credentials on-the-fly via a mobile hotspot, without ever flashing via USB again!
 - **🤖 AI Code Editor**: Built-in AI assistant to generate custom Arduino code for your specific IoT needs.
 - **⚡ Web Serial Flasher**: Upload code directly to your ESP32/ESP8266 via the browser—no Arduino IDE required!
 - **📊 Real-time Dashboard**: Monitor device health, online/offline status, WiFi signal (RSSI), and memory usage.
@@ -44,7 +48,8 @@ To deploy Signal on your own server (e.g., cPanel, VPS, or local XAMPP), follow 
 
 ### 3. Database Initialization
 1. Navigate to `https://your-domain.com/setup.php` in your browser.
-2. This will automatically create all necessary tables (`users`, `projects`, `devices`, `device_logs`, `esp_heartbeat`).
+2. This will automatically execute the **Intelligent Installer**. It safely creates all 8 necessary tables (`users`, `projects`, `devices`, `device_logs`, `esp_heartbeat`, `firmware_updates`, etc.). 
+   * **Note on Updating**: If you are upgrading from an older version, `setup.php` will automatically detect legacy tables and gracefully patch in new schema capabilities (like Regulator ENUMs and Auto-Timer columns) without *any* data loss!
 3. **IMPORTANT**: Delete `setup.php` from your server immediately after completion.
 
 ---
@@ -58,8 +63,9 @@ Visit the registration page and create your Signal account. Once logged in, you'
 In the dashboard, click on **"New Project"**. Provide a name (e.g., "Smart Home") and a unique folder slug. Signal will generate a **32-character Device Token** specifically for this project.
 
 ### Step 3: Get the Code
-Signal simplifies the hardware side:
-- **Auto-Generated Code**: Each project provides a "Copy ESP Code" button with your token and server URL pre-configured.
+Signal simplifies the hardware side by offering universal code generation:
+- **Standard Code**: Generates standard WiFi and MQTT/HTTP polling logic.
+- **Signal Air OTA Code**: Generates advanced code equipped with Over-The-Air update capabilities and the Signal Inject feature, letting you securely change the ESP's WiFi without re-flashing.
 - **AI Code Generation**: Use the **AI Code Editor** to describe your project (e.g., *"Make a 4-channel relay controller with a DHT11 sensor"*). The AI will generate the full Arduino source code for you.
 
 ### Step 4: Flash Your Device
@@ -88,10 +94,10 @@ Take your IoT project everywhere. Download the **Signal Android App** (`SignalAp
 ---
 
 ## 💻 Tech Stack
-- **Frontend**: Vanilla JavaScript (ES6+), Inter Font, FontAwesome, CSS3 (Glassmorphism).
+- **Frontend**: Vanilla JavaScript (ES6+), Chart.js (DataPulse), Inter Font, FontAwesome, CSS3 (Glassmorphism).
 - **Backend**: PHP 7.4+, PDO (PHP Data Objects).
 - **Real-time**: Ajax Poll (Dashboard Auto-Refresh) & Web Serial API.
-- **Database**: MySQL / MariaDB.
+- **Database**: MySQL / MariaDB (Intelligent Schema Auto-Patching).
 
 ---
 
