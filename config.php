@@ -8,9 +8,9 @@
 
 // Database Configuration
 define('DB_HOST', 'localhost'); // Usually 'localhost' on cPanel
-define('DB_NAME', 'ashikone_espiot'); // Create this in cPanel > MySQL Databases
-define('DB_USER', 'ashikone_espuser'); // Create this in cPanel > MySQL Databases  
-define('DB_PASS', 'Ashik@21032001'); // Set when creating DB user in cPanel
+define('DB_NAME', ''); // Create this in cPanel > MySQL Databases
+define('DB_USER', ''); // Create this in cPanel > MySQL Databases  
+define('DB_PASS', ''); // Set when creating DB user in cPanel
 
 // Site Configuration  
 define('SITE_URL', 'https://esp.ashikone.com'); // Your subdomain URL
